@@ -2,6 +2,8 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import './home.css';
+// import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router";
 
 class Home extends React.Component{
 
@@ -25,12 +27,16 @@ class Home extends React.Component{
     );
   };
 
-  moods = ["I'm feeling depressed",
-                 "I hope I don't mess up",
-                 "Everyone is going to laugh at me",
-                 "I'm not good enough",
-                 "What's the point?"  
-          ];
+  // redirectToQuote = () => {
+  //   this.props.history.push('/quote')
+  // }
+
+  public moods = [ "I'm feeling depressed",
+                   "I hope I don't mess up",
+                   "Everyone is going to laugh at me",
+                   "I'm not good enough",
+                   "What's the point?"
+                 ];
 }
 
 
