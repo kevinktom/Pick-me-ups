@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class Quote extends React.Component{
+interface QuoteObject {
+  text?: string
+  author?: string
+}
+
+class Quote extends React.Component<{}, { quote: QuoteObject }>{
   constructor(props: any){
     super(props);
+    this.state = {
+      quote: {"text": "He is able who thinks he is able.",
+              "author": "Buddha"}
+    }
   }
 
   public quotes: [] = [];
-  public quote = {
-                        "text": "He is able who thinks he is able.",
-                        "author": "Buddha"
-                      };
 
   render = () => {
     return (
       <>
-        <p>{this.quote.text} - {this.quote.author}</p>
+        <p>{this.state.quote.text} - {this.state.quote.author}</p>
         &nbsp;
       </>
     );
@@ -23,7 +28,10 @@ class Quote extends React.Component{
 
   componentDidMount = () => {
     this.getQuotes();
-    this.quote = this.getRandomQuote()
+  }
+
+  componentDidUpdate = () => {
+    
   }
   
 
@@ -34,8 +42,8 @@ class Quote extends React.Component{
       return response.json();
     })
     .then(function(data) {
-      that.quotes=data;
-      console.log(that.quotes);
+      that.quotes = data;
+      that.setState({quote: that.getRandomQuote()})
     });
   }
 
