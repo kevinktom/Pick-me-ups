@@ -2,3 +2,28 @@
     display: flex;
     justify-content: center;
 }
+
+.container-quote {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.box-quote {
+    height: 300px;
+}
+
+.quotation-mark-img {
+    margin: 0 auto;
+    height: 100px;
+    width: auto;
+    opacity: 0.5;
+}
+
+.quotetext {
+    font-size: 40px;
+}
+
+.author {
+    font-size: 24px;
+    text-align: right;
+}
