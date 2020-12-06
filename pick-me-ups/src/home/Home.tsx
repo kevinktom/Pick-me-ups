@@ -1,28 +1,33 @@
-import { render } from "@testing-library/react";
 import React from "react";
-import { Link } from "react-router-dom";
 import './home.css';
-// import {withRouter} from 'react-router-dom';
-import { withRouter } from "react-router";
 import Quote from "../quote/Quote";
 
-class Home extends React.Component{
+class Home extends React.Component<{}, {answers: string[], currentAnswer: string}>{
+  constructor(props: any){
+    super(props);
+    this.state = {
+      answers: [],
+      currentAnswer: ''
+    }
+  }
 
   render() {
     return (
       <>
         <h1 id='header'>Pick me ups</h1>
-        {/* <Link to="/quote"> back to quote page</Link> */}
-  
-        <div id='cardBody'
-              >
-            {this.moods.map(mood => (
-              <div id='moods'>
-                <p>{mood}</p>
-              </div>
-            ))}
+        <div>
+
         </div>
-        <Quote></Quote>
+        {this.state.answers.length !== this.questions.length &&
+          <div id='cardBody'>
+            <h2>{this.questions[this.state.answers.length]}</h2>
+            <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="inputBox" cols={30} rows={10}></textarea>
+            <button onClick={this.onAnswerEnter}>Enter</button>
+            <button onClick={this.returnPreviousQuestion}>Go Back</button>
+            <button onClick={this.generateRandomQuote}>Give me wisdom</button>
+          </div>
+        }
+        {this.state.answers.length === this.questions.length && <Quote resetAnswers={this.resetAnswers} answers={this.state.answers}></Quote>}
         
         &nbsp;
   
@@ -30,19 +35,36 @@ class Home extends React.Component{
     );
   };
 
-  // redirectToQuote = () => {
-  //   this.props.history.push('/quote')
-  // }
+  public questions = ["How are you feeling right now?",
+                      "Why do you think you are feeling this way?"
+                     ]
 
-  public moods = [ "I'm feeling depressed",
-                   "I hope I don't mess up",
-                   "Everyone is going to laugh at me",
-                   "I'm not good enough",
-                   "What's the point?"
-                 ];
+  
+  onTextAreaChange = (event: any) => {
+    this.setState({currentAnswer: event.target.value})
+  }
+
+  onAnswerEnter = () => {
+    this.setState({answers: [...this.state.answers, this.state.currentAnswer], currentAnswer: ''});
+  }
+
+  resetAnswers = () => {
+    this.setState({answers: [], currentAnswer: ''});
+  }
+
+  returnPreviousQuestion = () => {
+    const lastAnswer = this.state.answers.slice(-1)[0]
+    this.setState({answers: this.state.answers.slice(0,-1), currentAnswer: lastAnswer})
+  }
+
+  generateRandomQuote = () => {
+    const blankAnswers = [];
+    for(let i=0; i < this.questions.length; i++){
+      blankAnswers.push('');
+    }
+    this.setState({answers: blankAnswers});
+  }
+
 }
-
-
-
 
 export default Home;
