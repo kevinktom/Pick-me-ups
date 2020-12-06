@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import './quote.css';
 
 interface QuoteObject {
   text?: string
@@ -10,8 +10,8 @@ class Quote extends React.Component<{}, { quote: QuoteObject }>{
   constructor(props: any){
     super(props);
     this.state = {
-      quote: {"text": "He is able who thinks he is able.",
-              "author": "Buddha"}
+      quote: {"text": "",
+              "author": ""}
     }
   }
 
@@ -20,7 +20,9 @@ class Quote extends React.Component<{}, { quote: QuoteObject }>{
   render = () => {
     return (
       <>
+      <div id='quoteBody'>
         <p>{this.state.quote.text} - {this.state.quote.author}</p>
+      </div>
         &nbsp;
       </>
     );

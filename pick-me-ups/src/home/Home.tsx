@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import './home.css';
 // import {withRouter} from 'react-router-dom';
 import { withRouter } from "react-router";
+import Quote from "../quote/Quote";
 
 class Home extends React.Component{
 
@@ -11,7 +12,7 @@ class Home extends React.Component{
     return (
       <>
         <h1 id='header'>Pick me ups</h1>
-        <Link to="/quote"> back to quote page</Link>
+        {/* <Link to="/quote"> back to quote page</Link> */}
   
         <div id='cardBody'
               >
@@ -21,6 +22,8 @@ class Home extends React.Component{
               </div>
             ))}
         </div>
+        <Quote></Quote>
+        
         &nbsp;
   
       </>
