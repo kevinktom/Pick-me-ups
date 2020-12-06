@@ -6,7 +6,7 @@ interface QuoteObject {
   author?: string
 }
 
-class Quote extends React.Component<{}, { quote: QuoteObject }>{
+class Quote extends React.Component<{resetAnswers: () => void, answers: string[]}, { quote: QuoteObject }>{
   constructor(props: any){
     super(props);
     this.state = {
@@ -21,7 +21,13 @@ class Quote extends React.Component<{}, { quote: QuoteObject }>{
     return (
       <>
       <div id='quoteBody'>
-        <p>{this.state.quote.text} - {this.state.quote.author}</p>
+        { this.state.quote.text &&
+          <div>
+            <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p>
+            <button onClick={this.getRandomQuote}>Give me another quote</button>
+            <button onClick={this.props.resetAnswers}>Reset</button>
+          </div>
+        }
       </div>
         &nbsp;
       </>
@@ -45,13 +51,13 @@ class Quote extends React.Component<{}, { quote: QuoteObject }>{
     })
     .then(function(data) {
       that.quotes = data;
-      that.setState({quote: that.getRandomQuote()})
+      that.getRandomQuote();
     });
   }
 
   getRandomQuote = () => {
-    const idx = this.getRandomNumber(0, this.quotes.length)
-    return this.quotes[idx];
+    const idx = this.getRandomNumber(0, this.quotes.length);
+    this.setState({quote: this.quotes[idx]});
   }
 
   getRandomNumber = (minNum: number = -Infinity, maxNum: number = Infinity) => {
