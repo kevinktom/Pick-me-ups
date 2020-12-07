@@ -28,6 +28,11 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
       <div id='quoteBody' className="container-quote">
         { text &&
           <div>
+            <div className="button-actions" id="button-quote">
+
+              <button onClick={this.getRandomQuote}>Another quote</button>
+              <button onClick={this.props.resetAnswers}>Reset</button>
+            </div>
             {/* <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p> */}
             <div style={{display:"flex"}}>
               <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
@@ -36,15 +41,11 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
               <div className="quotetext">
                 {text}
               </div>
+              &nbsp; 
               <div className="author">
-                - {author}
+                - {author ? author : 'Unknown'}
               </div>
 
-            </div>
-            <div className="button-actions">
-
-              <button onClick={this.getRandomQuote}>Give me another quote</button>
-              <button onClick={this.props.resetAnswers}>Reset</button>
             </div>
           </div>
         }

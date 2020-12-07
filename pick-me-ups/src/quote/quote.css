@@ -10,6 +10,16 @@
 
 .box-quote {
     height: 300px;
+    width: 507px;
+}
+
+.box-quote > * {
+    line-height: 1.5;
+}
+
+#button-quote {
+    display: flex;
+    justify-content: center
 }
 
 .quotation-mark-img {
