@@ -13,35 +13,42 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
 
   render() {
     return (
-      <>
-        <h1 id='header'>Pick me ups</h1>
-        <div>
+      <div className="frame">
+        <div className="container">
+          <h1 id='header'>Pick me ups</h1>
 
+          {this.state.answers.length !== this.questions.length &&
+            <div id='cardBody'>
+              <h2>{this.questions[this.state.answers.length]}</h2>
+              <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="textareaBox" onKeyDown={this.onEnterKeyDown} placeholder="be honest"></textarea>
+              <div className="button-actions">
+                <button onClick={this.onAnswerEnter}>Next Question</button>
+                <button onClick={this.returnPreviousQuestion}>Back</button>
+                <button onClick={this.generateRandomQuote}>Enlighten Me</button>
+              </div>
+            </div>
+          }
+          {this.state.answers.length === this.questions.length && <Quote resetAnswers={this.resetAnswers} answers={this.state.answers}></Quote>}
+      
         </div>
-        {this.state.answers.length !== this.questions.length &&
-          <div id='cardBody'>
-            <h2>{this.questions[this.state.answers.length]}</h2>
-            <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="inputBox" cols={30} rows={10}></textarea>
-            <button onClick={this.onAnswerEnter}>Enter</button>
-            <button onClick={this.returnPreviousQuestion}>Go Back</button>
-            <button onClick={this.generateRandomQuote}>Give me wisdom</button>
-          </div>
-        }
-        {this.state.answers.length === this.questions.length && <Quote resetAnswers={this.resetAnswers} answers={this.state.answers}></Quote>}
-        
-        &nbsp;
-  
-      </>
+      </div>
     );
   };
 
-  public questions = ["How are you feeling right now?",
-                      "Why do you think you are feeling this way?"
-                     ]
+  public questions = [
+    "How are you feeling right now?",
+    "Why do you think you are feeling this way?"
+  ]
 
-  
-  onTextAreaChange = (event: any) => {
-    this.setState({currentAnswer: event.target.value})
+  onEnterKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      this.onAnswerEnter()
+    }
+  }
+
+  onTextAreaChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    this.setState({currentAnswer: event.currentTarget.value})
   }
 
   onAnswerEnter = () => {

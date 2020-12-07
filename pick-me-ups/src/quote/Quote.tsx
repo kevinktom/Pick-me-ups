@@ -1,5 +1,6 @@
 import React from "react";
 import './quote.css';
+import quotationMark from "../quotation-mark.svg"
 
 interface QuoteObject {
   text?: string
@@ -10,26 +11,46 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
   constructor(props: any){
     super(props);
     this.state = {
-      quote: {"text": "",
-              "author": ""}
+      quote: {
+        "text": "",
+        "author": ""
+      }
     }
   }
 
   public quotes: [] = [];
 
   render = () => {
+    const {text, author} = this.state.quote;
+
     return (
       <>
-      <div id='quoteBody'>
-        { this.state.quote.text &&
+      <div id='quoteBody' className="container-quote">
+        { text &&
           <div>
-            <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p>
-            <button onClick={this.getRandomQuote}>Give me another quote</button>
-            <button onClick={this.props.resetAnswers}>Reset</button>
+            <div className="button-actions" id="button-quote">
+
+              <button onClick={this.getRandomQuote}>Another quote</button>
+              <button onClick={this.props.resetAnswers}>Reset</button>
+            </div>
+            {/* <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p> */}
+            <div style={{display:"flex"}}>
+              <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
+            </div>
+            <div className="box-quote">
+              <div className="quotetext">
+                {text}
+              </div>
+              &nbsp; 
+              <div className="author">
+                - {author ? author : 'Unknown'}
+              </div>
+
+            </div>
           </div>
         }
       </div>
-        &nbsp;
+
       </>
     );
   };
