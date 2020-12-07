@@ -20,10 +20,10 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
           {this.state.answers.length !== this.questions.length &&
             <div id='cardBody'>
               <h2>{this.questions[this.state.answers.length]}</h2>
-              <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="textareaBox" onKeyDown={this.onEnterKeyDown} placeholder="be honest"></textarea>
+              <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="textareaBox" onKeyDown={this.onEnterKeyDown}></textarea>
               <div className="button-actions">
                 <button onClick={this.onAnswerEnter}>Next Question</button>
-                <button onClick={this.returnPreviousQuestion}>Back</button>
+                {this.state.answers.length > 0 && <button onClick={this.returnPreviousQuestion}>Back</button>}
                 <button onClick={this.generateRandomQuote}>Enlighten Me</button>
               </div>
             </div>
@@ -37,7 +37,9 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
 
   public questions = [
     "How are you feeling right now?",
-    "Why do you think you are feeling this way?"
+    "What do you think is causing you to feel this way?",
+    "How did you respond?",
+    "Is there anything you would like to get off your mind?"
   ]
 
   onEnterKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
