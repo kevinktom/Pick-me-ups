@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
 #quoteBody{
     display: flex;
     justify-content: center;
@@ -31,9 +33,11 @@
 
 .quotetext {
     font-size: 35px;
+    font-family: 'Caveat', cursive;
 }
 
 .author {
     font-size: 24px;
     text-align: right;
+    font-family: 'Caveat', cursive;
 }

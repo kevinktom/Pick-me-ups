@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
 #header{
     display: flex;
     justify-content: center;
     margin: 0; 
     padding: 21px;
+    font-family: 'Caveat', cursive;
+    font-size: 84px;
 }
 
 #moods{
@@ -17,6 +21,7 @@
     height: 200%;
     resize: none;
     border-radius: 5px;
+    margin-bottom: 1rem;
 }
 
 #cardBody{
@@ -28,7 +33,7 @@
 }
 
 .frame{
-    background-color: black;
+    background-color: #7D7ABC;
     width: 100vw; 
     height: 100vh;
 }
@@ -38,9 +43,12 @@
     padding: 5px 10px;
     margin-right: 5px;
     color: white;
-    background: black;
+    background: #EF767A;
     border: 1px solid white;
     border-radius: 5px;
     font-weight: bolder;
     font-size: 16px;
+    cursor: pointer;
 }
+
+textarea { font-size: 18px; }
