@@ -37,7 +37,7 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
             <div style={{display:"flex"}}>
               <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
             </div>
-            <div className="box-quote">
+            <div className="box-quote fade-in">
               <div className="quotetext">
                 {text}
               </div>
