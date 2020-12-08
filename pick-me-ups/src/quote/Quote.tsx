@@ -7,22 +7,35 @@ interface QuoteObject {
   author?: string
 }
 
-class Quote extends React.Component<{resetAnswers: () => void, answers: string[]}, { quote: QuoteObject }>{
+class Quote extends React.Component<{resetAnswers: () => void, answers: string[]}, { quote: QuoteObject, fadeIn: boolean }>{
   constructor(props: any){
     super(props);
     this.state = {
       quote: {
         "text": "",
         "author": ""
-      }
+      },
+      fadeIn: true
     }
+  }
+
+  onAnimationStart = () => {
+    this.setState({
+      fadeIn: true
+    })
+  }
+
+  onAnimationEnd = () => {
+    this.setState({
+      fadeIn: false
+    })
   }
 
   public quotes: [] = [];
 
   render = () => {
     const {text, author} = this.state.quote;
-
+    const fadeInClass = this.state.fadeIn ? "fade-in" : "";
     return (
       <>
       <div id='quoteBody' className="container-quote">
@@ -30,14 +43,21 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
           <div>
             <div className="button-actions" id="button-quote">
 
-              <button onClick={this.getRandomQuote}>Another quote</button>
+              <button 
+                onClick={this.getRandomQuote}
+                
+              >Another quote</button>
               <button onClick={this.props.resetAnswers}>Reset</button>
             </div>
             {/* <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p> */}
             <div style={{display:"flex"}}>
               <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
             </div>
-            <div className="box-quote fade-in">
+            <div 
+              className={`box-quote ${fadeInClass}`} 
+              onAnimationEnd={this.onAnimationEnd}
+              onAnimationStart={this.onAnimationStart}
+            >
               <div className="quotetext">
                 {text}
               </div>
@@ -79,6 +99,8 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
   getRandomQuote = () => {
     const idx = this.getRandomNumber(0, this.quotes.length);
     this.setState({quote: this.quotes[idx]});
+    this.onAnimationEnd();
+    this.onAnimationStart();
   }
 
   getRandomNumber = (minNum: number = -Infinity, maxNum: number = Infinity) => {

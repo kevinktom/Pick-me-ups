@@ -2,16 +2,32 @@ import React from "react";
 import './home.css';
 import Quote from "../quote/Quote";
 
-class Home extends React.Component<{}, {answers: string[], currentAnswer: string}>{
+class Home extends React.Component<{}, {answers: string[], currentAnswer: string, slideRight:boolean}>{
   constructor(props: any){
     super(props);
     this.state = {
       answers: [],
-      currentAnswer: ''
+      currentAnswer: '',
+      slideRight: true
     }
   }
 
+  onAnimationStart = () => {
+    this.setState({
+      slideRight: true
+    })
+  }
+
+  onAnimationEnd = () => {
+    this.setState({
+      slideRight: false
+    })
+  }
+
+
   render() {
+    const slideRightClass = this.state.slideRight ? "slide-right" : "";
+
     return (
       <div className="frame">
         <div className="container">
@@ -19,8 +35,14 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
 
           {this.state.answers.length !== this.questions.length &&
             <div id='cardBody'>
-              <h2>{this.questions[this.state.answers.length]}</h2>
-              <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="textareaBox" onKeyDown={this.onEnterKeyDown}></textarea>
+              <div 
+                className={`${slideRightClass}`}
+                onAnimationStart={this.onAnimationStart}
+                onAnimationEnd={this.onAnimationEnd}
+              >
+                <h2>{this.questions[this.state.answers.length]}</h2>
+                <textarea onChange={this.onTextAreaChange} value={this.state.currentAnswer} name="" id="textareaBox" onKeyDown={this.onEnterKeyDown}></textarea>
+              </div>
               <div className="button-actions">
                 <button onClick={this.onAnswerEnter}>Next Question</button>
                 {this.state.answers.length > 0 && <button onClick={this.returnPreviousQuestion}>Back</button>}
@@ -55,6 +77,8 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
 
   onAnswerEnter = () => {
     this.setState({answers: [...this.state.answers, this.state.currentAnswer], currentAnswer: ''});
+    this.onAnimationEnd();
+    this.onAnimationStart();
   }
 
   resetAnswers = () => {
