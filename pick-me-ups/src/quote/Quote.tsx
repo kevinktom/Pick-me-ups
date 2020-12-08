@@ -30,11 +30,11 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
           <div>
             <div className="button-actions" id="button-quote">
 
-              <button onClick={this.getRandomQuote}>Another quote</button>
-              <button onClick={this.props.resetAnswers}>Reset</button>
+              <button onClick={this.getRandomQuote} className="fade-in">Another quote</button>
+              <button onClick={this.props.resetAnswers} className="fade-in">Reset</button>
             </div>
             {/* <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p> */}
-            <div style={{display:"flex"}}>
+            <div style={{display:"flex"}} className="fade-in">
               <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
             </div>
             <div className="box-quote fade-in">
