@@ -1,9 +1,10 @@
 import React from "react";
 import './quote.css';
-import quotationMark from "../quotation-mark.svg"
+import quotationMark from "../quotation-mark.svg";
+const axios = require("axios");
 
 interface QuoteObject {
-  text?: string
+  quote?: string
   author?: string
 }
 
@@ -12,7 +13,7 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
     super(props);
     this.state = {
       quote: {
-        "text": "",
+        "quote": "",
         "author": ""
       }
     }
@@ -21,12 +22,12 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
   public quotes: [] = [];
 
   render = () => {
-    const {text, author} = this.state.quote;
+    const {quote, author} = this.state.quote;
 
     return (
       <>
       <div id='quoteBody' className="container-quote">
-        { text &&
+        { quote &&
           <div>
             <div className="button-actions" id="button-quote">
 
@@ -39,7 +40,7 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
             </div>
             <div className="box-quote fade-in">
               <div className="quotetext">
-                {text}
+                {quote}
               </div>
               &nbsp; 
               <div className="author">
@@ -59,21 +60,18 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
     this.getQuotes();
   }
 
-  componentDidUpdate = () => {
-    
-  }
-  
-
   getQuotes = () => {
     const that = this;
-    fetch("https://type.fit/api/quotes")
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      that.quotes = data;
+    const answers = this.props.answers.join(' ');
+    axios.post("https://backend-pickmeups.herokuapp.com/api/quotes", { input: answers })
+    .then(function(response: any) {
+      console.log(response);
+      that.quotes = response.data;
+      console.log(that.quotes);
       that.getRandomQuote();
-    });
+      console.log(that.state.quote);
+      return response;
+    })
   }
 
   getRandomQuote = () => {
