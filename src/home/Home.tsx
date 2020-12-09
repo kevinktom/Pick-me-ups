@@ -54,7 +54,7 @@ class Home extends React.Component<{}, {answers: string[], currentAnswer: string
       
         </div>
         <div id="footer">
-          <a href="https://github.com/kevinktom/Pick-me-ups"><img src="/github_icon.png" alt=""/></a>
+          <a href="https://github.com/kevinktom/Pick-me-ups"><img src={process.env.PUBLIC_URL + '/github_icon.png'} alt=""/></a>
         </div>
       </div>
     );
