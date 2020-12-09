@@ -34,7 +34,6 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
               <button onClick={this.getRandomQuote} className="fade-in">Another quote</button>
               <button onClick={this.props.resetAnswers} className="fade-in">Reset</button>
             </div>
-            {/* <p>{this.state.quote.text} - {this.state.quote.author ? this.state.quote.author : 'Unknown'}</p> */}
             <div style={{display:"flex"}} className="fade-in">
               <img src={quotationMark} alt="quotation mark" className="quotation-mark-img"/>
             </div>
@@ -65,11 +64,8 @@ class Quote extends React.Component<{resetAnswers: () => void, answers: string[]
     const answers = this.props.answers.join(' ');
     axios.post("https://backend-pickmeups.herokuapp.com/api/quotes", { input: answers })
     .then(function(response: any) {
-      console.log(response);
       that.quotes = response.data;
-      console.log(that.quotes);
       that.getRandomQuote();
-      console.log(that.state.quote);
       return response;
     })
   }
