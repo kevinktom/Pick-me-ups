@@ -46,4 +46,5 @@ User responses are also filtered and assigned a category of quotes that compleme
 
 * KevinKTom@gmail.com
 * AndresKimLee@gmail.com
+* jonbae61596@gmail.com
 
