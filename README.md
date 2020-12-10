@@ -31,6 +31,8 @@ The user can also go ahead and generate a random quote from a source of many wel
 This project was built using ParallelDot's Emotion Analysis API to categorize and filter quotes.
 User responses are also filtered and assigned a category of quotes that complement the responeses based on the emotion type.  
 
+![alt text](https://github.com/kevinktom/Pick-me-ups/blob/main/public/application_example.png?raw=true)
+
 ### Built With
 
 * React
